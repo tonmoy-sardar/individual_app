@@ -88,8 +88,8 @@ export class StoreAppService {
     return this.http.post(Globals.apiEndpoint + 'add_rating/', data)
   }
 
-  paytmFormValue(order_amount, table_order_id, app_id): Observable<any> {
-    return this.http.get(Globals.apiEndpoint + 'get_payment_details/?order_amount=' + order_amount + '&table_order_id=' + table_order_id + '&type=app&paytm_marchent_flag=1&app_id=' + app_id)
+  paytmFormValue(order_amount, table_order_id, app_id, customer_email): Observable<any> {
+    return this.http.get(Globals.apiEndpoint + 'get_payment_details/?order_amount=' + order_amount + '&table_order_id=' + table_order_id + '&type=app&paytm_marchent_flag=1&app_id=' + app_id + '&customer_email=' + customer_email)
   }
 
   getCustomerAddress(customer) {

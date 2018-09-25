@@ -88,6 +88,7 @@ export class StoreAppPaymentComponent implements OnInit {
     customer_details: any;
     user_info: string;
     order_id: number;
+    customer_email: string;
     constructor(
         private route: ActivatedRoute,
         private location: Location,
@@ -108,6 +109,12 @@ export class StoreAppPaymentComponent implements OnInit {
         var full_location = this.location.path().split('/');
         this.app_id = full_location[2].trim();
         this.user_id = getString('user_id');
+        if (getString('email') != undefined) {
+            this.customer_email = getString('email')
+        }
+        else {
+            this.customer_email = "customer@" + getString('contact_no')
+        }
         this.populateData();
         this.paytm = new Paytm();
         this.getCustomerAdressList(this.user_id);
@@ -456,7 +463,7 @@ export class StoreAppPaymentComponent implements OnInit {
     }
 
     getPaytmFormValue(amount: number, table_order_id: number) {
-        this.storeAppService.paytmFormValue(amount, table_order_id, this.app_id).subscribe(
+        this.storeAppService.paytmFormValue(amount, table_order_id, this.app_id, this.customer_email).subscribe(
             res => {
                 // console.log(res)
                 this.paytmFormDetails = res;

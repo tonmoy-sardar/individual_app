@@ -93,7 +93,9 @@ export class StoreAppProductsComponent implements OnInit {
     getStoreAppProductDetails() {
         this.loader.show(this.lodaing_options);
         let params = '';
-        params = '?page=' + this.page;
+        if (this.page > 1) {
+            params = '?page=' + this.page;
+        }
         this.storeAppService.getStoreAppProductDetails(this.app_id, params).subscribe(
             (res) => {
                 this.next_page = res['next'];
