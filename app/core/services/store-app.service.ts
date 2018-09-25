@@ -49,8 +49,8 @@ export class StoreAppService {
     return this.http.get(Globals.apiEndpoint + 'app_about_details/' + id + '/')
   }
 
-  getStoreAppProductDetails(id) {
-    return this.http.get(Globals.apiEndpoint + 'app_product_details/' + id + '/')
+  getStoreAppProductDetails(id, params) {
+    return this.http.get(Globals.apiEndpoint + 'app_product_details/' + id + '/' + params)
   }
 
 

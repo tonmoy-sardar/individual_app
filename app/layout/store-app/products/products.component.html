@@ -1,4 +1,4 @@
-<ScrollView row="0">
+<ScrollView row="0" (scroll)="onScroll($event)">
     <StackLayout padding="10" *ngIf="accordian_view_key && serviceType==1">
         <StackLayout *ngFor="let category of category_list">
             <GridLayout columns="*" rows="*,*" *ngIf="category.items.length > 0">

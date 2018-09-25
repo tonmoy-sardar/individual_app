@@ -50,6 +50,8 @@ export class StoreAppProductsComponent implements OnInit {
         }
     }
     currency: string;
+    page: number = 1;
+    next_page: string;
     constructor(
         private route: ActivatedRoute,
         private storeAppService: StoreAppService,
@@ -83,17 +85,24 @@ export class StoreAppProductsComponent implements OnInit {
                     this.customer_cart_data = [];
                 }
 
-                this.getStoreAppProductDetails(this.app_id);
+                this.getStoreAppProductDetails();
             }
         );
     }
 
-    getStoreAppProductDetails(id) {
+    getStoreAppProductDetails() {
         this.loader.show(this.lodaing_options);
-        this.storeAppService.getStoreAppProductDetails(id).subscribe(
-            res => {
+        let params = '';
+        params = '?page=' + this.page;
+        this.storeAppService.getStoreAppProductDetails(this.app_id, params).subscribe(
+            (res) => {
+                this.next_page = res['next'];
+                if (this.page == 1) {
+                    this.category_list = [];
+                }
                 this.app_details = res;
-                this.category_list = this.app_details.app_product_categories;
+                var data_list = [];
+                data_list = this.app_details.app_product_categories;
 
 
                 if (this.app_details.is_product_service) {
@@ -103,22 +112,26 @@ export class StoreAppProductsComponent implements OnInit {
                     this.serviceType = 1
                 }
 
-                for (var i = 0; i < this.category_list.length; i++) {
-                    this.category_list[i]['items'] = JSON.parse(JSON.stringify(this.category_list[i].products));
+
+                for (var i = 0; i < data_list.length; i++) {
+                    data_list[i]['items'] = JSON.parse(JSON.stringify(data_list[i].products));
                     // isCart implemented
-                    for (var j = 0; j < this.category_list[i].items.length; j++) {
-                        var index = this.customer_cart_data.findIndex(y => y.app_id == this.category_list[i].items[j].app_master && y.product_id == this.category_list[i].items[j].id && y.customer_id == this.user_id);
+                    for (var j = 0; j < data_list[i].items.length; j++) {
+                        var index = this.customer_cart_data.findIndex(y => y.app_id == data_list[i].items[j].app_master && y.product_id == data_list[i].items[j].id && y.customer_id == this.user_id);
 
                         if (index != -1) {
-                            this.category_list[i].items[j]['isCart'] = true;
-                            this.category_list[i].items[j]['quantity'] = this.customer_cart_data[index].quantity
+                            data_list[i].items[j]['isCart'] = true;
+                            data_list[i].items[j]['quantity'] = this.customer_cart_data[index].quantity
                         }
                         else {
-                            this.category_list[i].items[j]['isCart'] = false;
-                            this.category_list[i].items[j]['quantity'] = 0;
+                            data_list[i].items[j]['isCart'] = false;
+                            data_list[i].items[j]['quantity'] = 0;
                         }
                     }
+                    this.category_list.push(data_list[i])
                 }
+
+                // console.log(this.category_list)
 
                 if (this.category_list.length > 1) {
                     this.accordian_view_key = true
@@ -134,6 +147,17 @@ export class StoreAppProductsComponent implements OnInit {
                 this.loader.hide();
             }
         )
+    }
+
+    onScroll(e) {
+        if (this.next_page != null) {
+            var num_arr = this.next_page.split('=');
+            var count = +num_arr[num_arr.length - 1]
+            if (this.page == count - 1) {
+                this.page = count;
+                this.getStoreAppProductDetails();
+            }
+        }
     }
 
     addToCart(item) {
