@@ -1,0 +1,35 @@
+<ScrollView row="0">
+    <StackLayout padding="10" *ngIf="visible_key">
+        <FlexboxLayout class="m-t-150" flexDirection="column" alignItems="center">
+            <Image [src]="app_details.owner_pic" class="app_logo img-rounded" height="90" *ngIf="app_details.owner_pic != null"></Image>
+            <Image src="~/images/no-image-user.jpg" class="app_logo img-rounded" height="90" *ngIf="app_details.owner_pic == null"></Image>
+
+            <Label [text]="app_details.owner_name" fontSize="18" class="business_name m-t-10" textWrap="true"></Label>
+            <Label fontSize="15" lineHeight="10" [text]="app_details.designation_details.designation_name" class="owner_desigi"
+                textWrap="true"></Label>
+            <Label text="Business Address" class="owner_desigi business_address m-t-30" textWrap="true"></Label>
+            <Label fontSize="15" lineHeight="10" [text]="app_details.store_address" class="owner_desigi m-t-5" textWrap="true"></Label>
+            <Label text="Website" class="owner_desigi business_address m-t-30" *ngIf="app_details.app_website_url != null"
+                textWrap="true"></Label>
+            <Label fontSize="15" lineHeight="10" [text]="app_details.app_website_url" class="owner_desigi m-t-5" *ngIf="app_details.app_website_url != null"
+                textWrap="true"></Label>
+        </FlexboxLayout>
+
+        <FlexboxLayout class="button-center">
+            <AbsoluteLayout width="50%">
+                <Label class="btn btn-primary" backgroundColor="#284058" color="#fff" width="100%" text="Chat" (tap)="massage()" textAlignment="center"></Label>
+                <Label *ngIf="chat_unread_length > 0" verticalAlignment="center" fontSize="8" [text]="chat_unread_length" class="body unread" left="6"
+                    top="3" textAlignment="center"></Label>
+            </AbsoluteLayout>
+            <Label class="btn btn-primary" backgroundColor="#284058" color="#fff" width="50%" text="Call" (tap)="call(app_details.user.user_details[0].contact_no)"
+                *ngIf="app_details.user.user_details[0].contact_no != null" textAlignment="center"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout class="social-media-section" justifyContent="center" alignItems="flex-start" alignItems="center"
+            *ngIf="social_media_links.length>0">
+            <StackLayout *ngFor="let social_media of social_media_links" padding="10" orientation="vertical">
+                <Label class="fa social-icon" [text]="social_media.social_media_type_details.icon | fonticon" (tap)="launch(social_media.url)"
+                    top="10" left="10"></Label>
+            </StackLayout>
+        </FlexboxLayout>
+    </StackLayout>
+</ScrollView>

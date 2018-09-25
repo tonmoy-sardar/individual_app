@@ -1,0 +1,11 @@
+<app-action-bar [appId]="app_id"></app-action-bar>
+<GridLayout rows="*,auto">
+    <DockLayout stretchLastChild="true">
+        <GridLayout rows="*" class="bg-color">
+            <router-outlet></router-outlet>
+        </GridLayout>
+    </DockLayout>
+    <StackLayout backgroundColor="#fff" row="1">
+        <app-menu-bar [appId]="app_id"></app-menu-bar>
+    </StackLayout>
+</GridLayout>

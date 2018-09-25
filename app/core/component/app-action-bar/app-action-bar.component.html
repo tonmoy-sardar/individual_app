@@ -1,0 +1,46 @@
+<ActionBar title="">
+    <GridLayout rows="*" columns="40,*,40,40" verticalAlignment="center" *ngIf="visible_key && isAboutPage">
+        <!-- <StackLayout (tap)="goBack()">
+            <Image src="~/images/back.png" height="30" width="30" row="0" col="0" verticalAlignment="center"></Image>
+        </StackLayout> -->
+        <Image [src]="app_details?.logo" class="action-image" row="0" col="0" verticalAlignment="center" *ngIf="app_details?.logo != null"></Image>
+        <Image src="~/images/no-image-logo.jpg" class="action-image" row="0" col="0" *ngIf="app_details?.logo == null"></Image>
+        <!-- <Label [text]="app_details?.business_name" class="action-label" color="#fff" fontSize="12" row="0" col="2"
+            verticalAlignment="center"></Label> -->
+
+      
+        <StackLayout *ngIf="product_list.length > 0 && serviceType==1" [nsRouterLink]="['/store-app/', appId , 'cart']"
+            row="0" col="2">
+            <AbsoluteLayout width="40" height="30">
+                <Label class="fa cart-label" top="10" color="#fff" [text]="'fa-shopping-cart' | fonticon"
+                    verticalAlignment="center"></Label>
+                <Label class="circle-wrapper" color="#fff" [text]="customer_cart_data.length" *ngIf="customer_cart_data.length > 0"
+                    verticalAlignment="center" left="5" top="0" margin="5" width="18" height="18" textAlignment="center"></Label>
+            </AbsoluteLayout>
+        </StackLayout>
+        <Label class="fa logout-label" color="#fff" (tap)="logout()" [text]="'fa-power-off' | fonticon" *ngIf="isLoggedin"
+            row="0" col="3" verticalAlignment="center"></Label>
+    </GridLayout>
+    <GridLayout rows="*" columns="40,40,*,40,40" verticalAlignment="center" *ngIf="visible_key && !isAboutPage">
+        <StackLayout (tap)="goBack()">
+            <Image src="~/images/back.png" height="30" width="30" row="0" col="0" verticalAlignment="center"></Image>
+        </StackLayout>
+        <Image [src]="app_details?.logo" class="action-image" row="0" col="1" verticalAlignment="center" *ngIf="app_details?.logo != null"></Image>
+        <Image src="~/images/no-image-logo.jpg" class="action-image" row="0" col="1" *ngIf="app_details?.logo == null"></Image>
+        <!-- <Label [text]="app_details?.business_name" class="action-label" color="#fff" fontSize="12" row="0" col="2"
+            verticalAlignment="center"></Label> -->
+
+      
+        <StackLayout *ngIf="product_list.length > 0 && serviceType==1" [nsRouterLink]="['/store-app/', appId , 'cart']"
+            row="0" col="3">
+            <AbsoluteLayout width="40" height="30">
+                <Label class="fa cart-label" top="10" color="#fff" [text]="'fa-shopping-cart' | fonticon"
+                    verticalAlignment="center"></Label>
+                <Label class="circle-wrapper" color="#fff" [text]="customer_cart_data.length" *ngIf="customer_cart_data.length > 0"
+                    verticalAlignment="center" left="5" top="0" margin="5" width="18" height="18" textAlignment="center"></Label>
+            </AbsoluteLayout>
+        </StackLayout>
+        <Label class="fa logout-label" color="#fff" (tap)="logout()" [text]="'fa-power-off' | fonticon" *ngIf="isLoggedin"
+            row="0" col="4" verticalAlignment="center"></Label>
+    </GridLayout>
+</ActionBar>

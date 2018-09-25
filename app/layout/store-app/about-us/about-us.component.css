@@ -1,0 +1,18 @@
+.img-rounded {
+    border-radius: 50%;
+    background: #f9ece3;
+}
+
+.business_name {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.rating {
+    color: gray;
+    padding: 2;
+}
+
+.rating.active {
+    color: green;
+}

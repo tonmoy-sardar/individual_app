@@ -1,0 +1,60 @@
+<Accordion [items]="order_list" itemTapped="tapped" class="category_product_accordian" separatorColor="transparent" *ngIf="order_list.length > 0 && visible_key">
+    <ng-template accordionHeaderTemplate let-item="item" let-i="index">
+        <GridLayout columns="*,*,*,*,*" rows="*" class="category_heading" borderWidth="1" borderColor="#ccc">
+            <Label [text]="item.order_id" row="0" col="0"></Label>
+            <Label [text]="item.price | currency: currency : true:'1.0-0'" row="0" col="1"></Label>
+            <Label [text]="item.created_at | date:'dd-MM-yyyy'" row="0" col="2"></Label>
+            <Label row="0" col="3" *ngIf="!item.is_paid" text="Not Paid"></Label>
+            <Label row="0" col="3" *ngIf="item.is_paid" text="Paid"></Label>
+            <Label row="0" col="4" *ngIf="!item.delivery_status" text="Not Delivered"></Label>
+            <Label row="0" col="4" *ngIf="item.delivery_status" text="Delivered"></Label>
+        </GridLayout>
+    </ng-template>
+    <ng-template accordionItemTemplate let-item="item" let-parent="parentIndex" let-even="even" let-child="childIndex">
+        <StackLayout padding="10" backgroundColor="#fff">
+            <CardView class="whiteCard">
+                <GridLayout rows="*" columns="*,*" padding="10" verticalAlignment="center">
+                    <StackLayout row="0" col="0" verticalAlignment="center" orientation="vertical" horizontalAlignment="left">
+                        <Label [text]="item.product_details.product_name" textWrap="true" verticalAlignment="center" class="product_name"></Label>
+                        <StackLayout orientation="horizontal">
+                            <Label [text]="item.product_details.discounted_price | currency: currency : true:'1.0-0'" class="original_price" textWrap="true" *ngIf="item.product_details.discounted_price > 0"></Label>
+                            <Label [text]="item.product_details.price | currency: currency : true:'1.0-0'" class="original_price" textWrap="true" [ngClass]="[item.product_details.discounted_price > 0 ? 'isDiscount' : '']"></Label>
+                            <Label [text]="getDiscount(item.product_details.price,item.product_details.discounted_price)" class="discount" textWrap="true" *ngIf="item.product_details.discounted_price > 0"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout horizontalAlignment="right" verticalAlignment="center" col="1" row="0" backgroundColor="#fff">
+                        <GridLayout rows="*,*,*" verticalAlignment="center">
+                            <Label row="0" verticalAlignment="center" textAlignment="center">
+                                <FormattedString>
+                                    <Span text="Quantity - "></Span>
+                                    <Span [text]="item.quantity"></Span>
+                                </FormattedString>
+                            </Label>
+                            <Label row="1" verticalAlignment="center" textAlignment="center">
+                                <FormattedString>
+                                    <Span text="Packaging charge - "></Span>
+                                    <Span [text]="item.packaging_cost | currency: currency : true:'1.0-0'"></Span>
+                                </FormattedString>
+                            </Label>
+                            <Label row="2" verticalAlignment="center" textAlignment="center">
+                                <FormattedString>
+                                    <Span text="Total cost - "></Span>
+                                    <Span [text]="item.total_cost | currency: currency : true:'1.0-0'"></Span>
+                                </FormattedString>
+                            </Label>
+                        </GridLayout>
+                    </StackLayout>
+                </GridLayout>
+            </CardView>
+        </StackLayout>
+    </ng-template>
+</Accordion>
+<FAB (tap)="more()" icon="res://more" rippleColor="#f1f1f1" class="fab-button" *ngIf="next_page != null"></FAB>
+<!-- <StackLayout orientation="vertical" *ngIf="order_list.length == 0 && visible_key" padding="10">
+    <Label text="You have no order in this app"></Label>
+</StackLayout> -->
+<CardView class="main_container" orientation="vertical" textAlignment="center" verticalAlignment="center" *ngIf="order_list.length == 0 && visible_key">
+    <StackLayout class="full-cardview">
+        <Label class="section_heading" fontSize="15" text="You have no order in this app"></Label>
+    </StackLayout>
+</CardView>

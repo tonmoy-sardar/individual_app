@@ -1,0 +1,68 @@
+<ScrollView row="0">
+    <StackLayout padding="10" *ngIf="visible_key && customer_cart_data.length > 0">
+        <StackLayout *ngFor="let item of customer_cart_data;let i = index">
+            <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0">
+                <GridLayout rows="*" columns="*,120,40" padding="8 10" verticalAlignment="center">
+                    <StackLayout row="0" col="0" verticalAlignment="center" orientation="vertical" horizontalAlignment="left">
+                        <Label [text]="item.product_name" textWrap="true" row="0" col="0" verticalAlignment="center" class="product_name"></Label>
+                        <StackLayout orientation="horizontal">
+                            <StackLayout row="0" col="1" verticalAlignment="center" orientation="horizontal">
+                                <Label [text]="item.quantity * item.discounted_price | currency: currency : true:'1.0-0'" class="discounted_price" textWrap="true" *ngIf="item.discounted_price > 0"></Label>
+                                <Label [text]="item.quantity * item.price | currency: currency : true:'1.0-0'" class="original_price" textWrap="true" [ngClass]="[item.discounted_price > 0 ? 'isDiscount' : '']"></Label>
+                                <Label [text]="getDiscount(item.price,item.discounted_price)" class="discount" textWrap="true" *ngIf="item.discounted_price > 0"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <GridLayout rows="*" columns="20,20,20" verticalAlignment="center" row="0" col="1">
+                        <Label padding="4" borderTopLeftRadius="2" borderBottomLeftRadius="2" class="fa" [text]="'fa-minus' | fonticon" color="#00a008" borderColor="#00a008" borderWidth="1" row="0" col="0" (tap)="decrement(i)" backgroundColor="#d5edd5" height="20" verticalAlignment="center"></Label>
+                        <Label FontSize="5" [text]="item.quantity" borderTopWidth="1" borderBottomWidth="1" borderBottomColor="#00a008" borderColor="#00a008" Color="#00a008" row="0" col="1" class="quantity" height="20" verticalAlignment="center"></Label>
+                        <Label padding="4" borderTopRightRadius="2" borderBottomRightRadius="2" class="fa" [text]="'fa-plus' | fonticon" color="#00a008" borderColor="#00a008" borderWidth="1" row="0" col="2" (tap)="increment(i)" backgroundColor="#d5edd5" height="20" verticalAlignment="center"></Label>
+                    </GridLayout>
+
+                    <Button borderRadius="2" paddingTop="4" class="fa pull-right" [text]="'fa-trash' | fonticon" row="0" col="2" verticalAlignment="center" backgroundColor="#999999" borderColor="#999999" color="#fff" borderWidth="1" (tap)="remove(item.product_id)" height="20"
+                        padding="2"></Button>
+
+
+                </GridLayout>
+            </CardView>
+        </StackLayout>
+        <StackLayout class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+
+        <CardView class="card" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0" shadowOffsetHeight="0">
+            <StackLayout padding="10">
+                <GridLayout rows="*,*,*,*" columns="*,50%" verticalAlignment="center" class="card">
+                    <StackLayout verticalAlignment="center" col="0" row="0">
+                        <Label class="pull-left " text="Total item price"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="center" col="1" row="0">
+                        <Label textAlignment="left" [text]="total_item_price | currency: currency : true:'1.0-0'"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="center" col="0" row="1">
+                        <Label class="pull-left " text="Total packing charge"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="center" col="1" row="1">
+                        <Label textAlignment="left" [text]="total_packing_price | currency: currency : true:'1.0-0'"></Label>
+                    </StackLayout>
+                    <StackLayout class="hr-light m-10" row="2" colSpan="2"></StackLayout>
+                    <StackLayout verticalAlignment="center" col="0" row="3">
+                        <Label class="pull-left font-weight-bold" text="Total"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="center" col="1" row="3">
+                        <Label class=" font-weight-bold" textAlignment="left" [text]="total_item_price + total_packing_price | currency: currency : true:'1.0-0'"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </CardView>
+
+        <StackLayout class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+        <StackLayout>
+            <Button class="btn btn-primary pull-right" backgroundColor="#284058" color="#fff" width="50%" text="Place Order" (tap)="orderPlace()"></Button>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout class="m-t-30" padding="10" *ngIf="visible_key && customer_cart_data.length == 0" style="text-align: center">
+
+        <Image class="logo" src="~/images/nocart.png" height="100" width="100"></Image>
+        <Label text="No item in cart" textWrap="true"></Label>
+        <Button class="btn btn-primary" text="Continue shopping" (tap)="shop()" backgroundColor="#284058" color="#fff" width="50%"></Button>
+    </StackLayout>
+</ScrollView>

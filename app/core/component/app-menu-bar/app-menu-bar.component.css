@@ -1,0 +1,13 @@
+.active-link {
+    color: #fff;
+    border-bottom: 2px solid red;
+}
+
+.tab-view-fonts {
+    color: #809bb6;
+}
+
+.tab-view-fonts {
+    background-color: #284058;
+    color: #809bb6;
+}

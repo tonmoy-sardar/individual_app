@@ -1,0 +1,31 @@
+.category_heading {
+    padding: 10;
+    color: #000;
+    font-size: 15;
+}
+
+.discounted_price {
+    font-weight: 600;
+    color: #000;
+}
+
+.original_price {
+    color: #000;
+    padding: 0 5;
+}
+
+.original_price.isDiscount {
+    text-decoration: line-through;
+}
+
+.discount {
+    color: #ccc;
+}
+
+.product_col {
+    width: 50%;
+}
+
+.product_image {
+    width: 100%;
+}

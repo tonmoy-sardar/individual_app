@@ -1,0 +1,43 @@
+<FlexboxLayout class="login-page">
+
+    <StackLayout class="full-content" *ngIf="visible_key">
+        <Image class="logo" [src]="app_details?.logo"  height="90" *ngIf="app_details?.logo != null"></Image>
+        <Image class="logo"  src="~/images/no-image-logo.jpg" height="90" *ngIf="app_details?.logo == null"></Image>
+        <StackLayout class="apps-container">
+            <StackLayout class="form" [formGroup]="form" novalidate>
+                <label class="head-line-store hedding-font" text="Sign In"></label>
+                <GridLayout rows="auto, auto">
+                    <StackLayout class="input-filld" row="0">
+                        <TextField class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" hint="Email id / Mobile Number " returnKeyType="next" formControlName="username" [ngClass]="displayFieldCss('username')"
+                            height="40" padding="10" fontSize="12"></TextField>
+                        <StackLayout *ngIf="isFieldValid('username')" class="invalid-feedback">
+                            <Label fontSize="8" text="User name is required"></Label>
+                        </StackLayout>
+                    </StackLayout>
+
+
+                    <StackLayout class="input-filld" row="1">
+                        <TextField hint="Password" class="input input-border cyan-border m-t-10" borderRadius="2" borderColor="#6c6969" backgroundColor="#fff" secure="true" returnKeyType="done"  formControlName="password" [ngClass]="displayFieldCss('password')"
+                            height="40" padding="10" fontSize="12"></TextField>
+                        <StackLayout *ngIf="isFieldValid('password')" class="invalid-feedback">
+                            <Label fontSize="8" text="Password is required"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </GridLayout>
+
+                <Button class="btn btn-primary" text="Sign In"  (tap)="signIn()" backgroundColor="#284058" color="#fff" width="50%">
+                </Button>
+                <StackLayout class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+                <Label text="Forgot your password?" class="tag-line-grey m-b-10 m-t-10" [nsRouterLink]="['/forgot-password']" ></Label>
+
+                <Label class="tag-line-grey m-b-10 m-t-10" [nsRouterLink]="['/signup']">
+                    <FormattedString>
+                        <Span text="New User? "></Span>
+                        <Span text="Sign up" class="bold-tag" ></Span>
+                    </FormattedString>
+                </Label>
+            </StackLayout>
+
+        </StackLayout>
+    </StackLayout>
+</FlexboxLayout>

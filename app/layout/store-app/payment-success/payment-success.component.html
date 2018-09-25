@@ -1,0 +1,82 @@
+<ScrollView row="0">
+    <StackLayout padding="10" *ngIf="visible_key">
+        <Label text="Order Placed Successfully" textWrap="true" class="m-b-30" textAlignment="center" class="heading"></Label>
+        <StackLayout class="hr-light pading-gap m-b-10 m-t-10"></StackLayout>
+        <StackLayout backgroundColor="#fff">
+            <CardView class="whiteCard">
+                <StackLayout horizontalAlignment="left" verticalAlignment="center" col="1" row="0">
+                    <GridLayout rows="*,*,*" verticalAlignment="center" orientation="vertical" borderWidth="1"
+                        borderColor="#ccc" padding="10">
+                        <Label row="0" verticalAlignment="center" textAlignment="left">
+                            <FormattedString>
+                                <Span color="#ababab" text="Order No: "></Span>
+                                <Span color="#000" fontWeight="700" [text]="order.order_id"></Span>
+                            </FormattedString>
+                        </Label>
+                        <Label row="1" verticalAlignment="center" textAlignment="left">
+                            <FormattedString>
+                                <Span color="#ababab" text="Order Date: "></Span>
+                                <Span color="#000" fontWeight="700" [text]="order.created_at | date:'dd-mm-yy'"></Span>
+                            </FormattedString>
+                        </Label>
+                        <Label row="2" verticalAlignment="center" textAlignment="left">
+                            <FormattedString>
+                                <Span color="#ababab" text="Delivery Status: "></Span>
+                                <Span color="#000" fontWeight="700" *ngIf="!order.delivery_status" text="Not Delivered"></Span>
+                            </FormattedString>
+                        </Label>
+                    </GridLayout>
+                </StackLayout>
+            </CardView>
+        </StackLayout>
+        <StackLayout class="m-t-10">
+            <CardView class="whiteCard">
+                <StackLayout>
+                    <GridLayout columns="*,*,*" rows="*" class="category_heading" borderWidth="1" borderColor="#ccc"
+                        backgroundColor="#f3f3f3">
+                        <Label text="Item" row="0" col="0" textAlignment="left"></Label>
+                        <Label text="Qty" row="0" col="1" textAlignment="left"></Label>
+                        <Label text="Price" row="0" col="2" textAlignment="right"></Label>
+                    </GridLayout>
+                    <GridLayout columns="*,*,*" rows="*" class="category_heading" borderWidth="1" borderColor="#ccc"
+                        *ngFor="let item of order.order_details" borderBottomWidth="1" borderBottomColor="#ccc">
+                        <Label [text]="item.product_details.product_name" row="0" col="0" textAlignment="left"></Label>
+                        <Label [text]="item.quantity" row="0" col="1" textAlignment="left"></Label>
+                        <Label [text]="item.total_cost | currency: currency : true:'1.0-0'" row="0" col="2"
+                            textAlignment="right"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </CardView>
+        </StackLayout>
+        <CardView class="card m-t-10" elevation="0" radius="0" shadowOpacity="0" shadowOffsetWidth="0"
+            shadowOffsetHeight="0">
+            <StackLayout padding="10">
+                <GridLayout rows="*,*,*,*" columns="*,50%" verticalAlignment="center" class="card">
+                    <StackLayout verticalAlignment="center" col="0" row="0">
+                        <Label class="pull-left " text="Total item price"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="center" col="1" row="0">
+                        <Label textAlignment="left" [text]="total_item_price | currency: currency : true:'1.0-0'"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="center" col="0" row="1">
+                        <Label class="pull-left " text="Total packing charge"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="center" col="1" row="1">
+                        <Label textAlignment="left" [text]="total_packing_price | currency: currency : true:'1.0-0'"></Label>
+                    </StackLayout>
+                    <StackLayout class="hr-light m-10" row="2" colSpan="2"></StackLayout>
+                    <StackLayout verticalAlignment="center" col="0" row="3">
+                        <Label class="pull-left font-weight-bold" text="Total"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="center" col="1" row="3">
+                        <Label class=" font-weight-bold" textAlignment="left" [text]="total_price | currency: currency : true:'1.0-0'"></Label>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </CardView>
+        <Label textAlignment="center" fontSize="15" lineHeight="10" text="Thank you for shopping with us" class="m-t-10"
+            textWrap="true"></Label>
+        <Button class="btn btn-primary" backgroundColor="#284058" color="#fff" width="40%" text="Contact Us"
+            [nsRouterLink]="['/store-app/', app_id , 'contact-us']"></Button>
+    </StackLayout>
+</ScrollView>

@@ -1,0 +1,36 @@
+<StackLayout class="tab-view-fonts" background="#284058" orientation="horizontal" *ngIf="visible_key && product_list.length > 0">
+    <StackLayout padding="10" orientation="vertical" width="25%" [nsRouterLink]="['/store-app/', appId , 'about-us']" nsRouterLinkActive="active-link">
+        <Label fontSize="20" class="fa" [text]="'fa-info' | fonticon" horizontalAlignment="center"></Label>
+        <Label fontSize="8" text="About Us" horizontalAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout padding="10" orientation="vertical"  *ngIf="serviceType==1" width="25%" [nsRouterLink]="['/store-app/', appId , 'products']" nsRouterLinkActive="active-link">
+        <Label fontSize="20" class="fa" [text]="'fa-shopping-basket' | fonticon" horizontalAlignment="center"></Label>
+        <Label fontSize="8" text="Products" horizontalAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout padding="10" orientation="vertical"  *ngIf="serviceType==2" width="25%" [nsRouterLink]="['/store-app/', appId , 'products']" nsRouterLinkActive="active-link">
+        <Label fontSize="20" class="fa" [text]="'fa-shopping-basket' | fonticon" horizontalAlignment="center"></Label>
+        <Label fontSize="8" text="Services" horizontalAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout padding="10" orientation="vertical" width="25%" [nsRouterLink]="['/store-app/', appId , 'contact-us']" nsRouterLinkActive="active-link">
+        <Label fontSize="20" class="fa" [text]="'fa-handshake-o' | fonticon" horizontalAlignment="center"></Label>
+        <Label fontSize="8" text="Contact Us" horizontalAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout padding="10" orientation="vertical" width="25%" [nsRouterLink]="['/store-app/', appId , 'my-account']" nsRouterLinkActive="active-link">
+        <Label fontSize="20" class="fa" [text]="'fa-user' | fonticon" horizontalAlignment="center"></Label>
+        <Label fontSize="8" text="My Account" horizontalAlignment="center"></Label>
+    </StackLayout>
+</StackLayout>
+<StackLayout class="tab-view-fonts" background="#284058" orientation="horizontal" *ngIf="visible_key && product_list.length == 0">
+    <StackLayout padding="10" orientation="vertical" width="33.33%" [nsRouterLink]="['/store-app/', appId , 'about-us']" nsRouterLinkActive="active-link">
+        <Label fontSize="20" class="fa" [text]="'fa-info' | fonticon" horizontalAlignment="center"></Label>
+        <Label fontSize="8" text="About Us" horizontalAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout padding="10" orientation="vertical" width="33.33%" [nsRouterLink]="['/store-app/', appId , 'contact-us']" nsRouterLinkActive="active-link">
+        <Label fontSize="20" class="fa" [text]="'fa-handshake-o' | fonticon" horizontalAlignment="center"></Label>
+        <Label fontSize="8" text="Contact Us" horizontalAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout padding="10" orientation="vertical" width="33.33%" [nsRouterLink]="['/store-app/', appId , 'my-account']" nsRouterLinkActive="active-link">
+        <Label fontSize="20" class="fa" [text]="'fa-user' | fonticon" horizontalAlignment="center"></Label>
+        <Label fontSize="8" text="My Account" horizontalAlignment="center"></Label>
+    </StackLayout>
+</StackLayout>

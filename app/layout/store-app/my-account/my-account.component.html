@@ -1,0 +1,11 @@
+<ScrollView row="0">
+    <StackLayout padding="10" orientation="vertical">
+        <FlexboxLayout flexDirection="column" alignItems="center" horizontalAlignment="center">
+            <Label [text]="customer_details?.customer_name" fontSize="15" class="m-b-10" textWrap="true"></Label>
+            <Label [text]="customer_details?.email" class="m-b-30" textWrap="true"></Label>
+            <Label [text]="customer_details?.contact_no" class="m-b-30" textWrap="true"></Label>
+        </FlexboxLayout>
+        <Button class="btn btn-primary" *ngIf="serviceType==1" text="Order List" backgroundColor="#284058" color="#fff" width="40%" horizontalAlignment="center" [nsRouterLink]="['/store-app/', app_id , 'order-list']">
+        </Button>
+    </StackLayout>
+</ScrollView>

@@ -1,0 +1,46 @@
+.img-rounded {
+    border-radius: 50%;
+    background: #f9ece3;
+}
+
+.business_name {
+    font-weight: 600;
+}
+
+.business_name {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.business_address {
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.owner_designation {
+    font-weight: 600;
+}
+
+.button-center {
+    margin-top: 30;
+}
+
+.social-media-section {
+    margin-top: 20;
+    margin-bottom: 20;
+}
+
+.social-icon {
+    color: #284058;
+    font-size: 30;
+}
+
+.unread {
+    color: #fff;
+    background-color: #dc3545;
+    float: right;
+    padding: 1;
+    height: 17;
+    width: 17;
+    border-radius: 50%;
+}
